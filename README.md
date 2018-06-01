@@ -1,6 +1,10 @@
+# Web Code Compiler
+
 I built a copy of the JS Bin website (https://jsbin.com).
 
 This website allows you to write HTML, CSS and JavaScript code and compile it through your web browser to see the result.
+
+## How it works
 
 It works in the following way:
 1) Toggle the top menu to make appear the sections that you want: HTML, CSS, JavaScript and Result. 
