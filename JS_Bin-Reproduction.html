@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+    <title>JS Bin Replicat</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+ 	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+
+ 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jqueryui.min.js"></script>-->
+
+ 	<!--ADD jQUERY UI plugin -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css"> 
+
+</head>
+
+<body>
+
+<div id="wrapper">
+	<div id="topbar">
+
+		<div id="logo"> My JS Bin v2.0</div>
+
+		<div id="buttonDiv">
+				<button id="runButton">Run</button>
+		</div>
+
+		<ul id="options">
+			<li class="toggle selected">HTML</li>
+			<li class="toggle">CSS</li>
+			<li class="toggle">JS</li>
+			<li class="toggle selected" style="border:none;">Result</li>		<!--We remove the style of this item so that no border on far right element -->
+			<!--we specify two classes here -->
+		</ul>
+	</div>
+
+	<div class="break"></div>
+
+	<div class="codeContainer" id="HTMLContainer">
+		
+		<div class="codeLabel">HTML</div>
+		<textarea class="code" id="htmlCode">
+<p id="text">
+	Example Code
+</p>
+
+	</textarea>		<!--To put our code here -->
+
+	</div>
+
+	<div class="codeContainer" id="CSSContainer">
+		
+		<div class="codeLabel">CSS</div>
+		<textarea class="code" id="cssCode">
+#text {
+	background:green;
+}
+
+		</textarea>		<!--To put our code here -->
+
+	</div>
+
+	<div class="codeContainer" id="JSContainer">
+		
+		<div class="codeLabel">JS</div>
+		<textarea class="code" id="JSCode">
+document.getElementById('text').innerHTML="Some other text";
+		</textarea>		<!--To put our code here -->
+
+	</div>
+
+	<div class="codeContainer" id="ResultContainer">
+		
+		<div class="codeLabel">Result</div>
+		<iframe id="resultFrame"></iframe>
+
+	</div>
+
+</div>
+
+
+	<script>
+		
+		var windowHeight = $(window).height();			//"window" refers to the screen window, we will get total height
+		var topbarHeight = $("#topbar").height();
+
+		var containerHeight = windowHeight-topbarHeight;
+		$(".codeContainer").height(containerHeight + "px");  //ATTENTION: important to specify units!!!
+
+
+		$(".toggle").click(function(){
+			$(this).toggleClass("selected");		//we want to toggle the class "selected": this means that it will be applied to any item of the list that is clicked
+
+			var activeDiv = $(this).html();	//gives content of div (eg: "CSS", "HTML", etc.)
+
+			$("#" + activeDiv + "Container").toggle();
+
+			//showingDivs = number of true (it is true if the div is showing)
+			var showingDivs = $(".codeContainer").filter(function(){		//will go through all .codeContainer
+					return($(this).css("display")!="none");
+			}).length;
+
+			var width = 100/showingDivs;		//we do that so we can adapt width depending on how many containers are showing
+
+
+			$(".codeContainer").css("width", width+"%");
+
+		});
+
+
+		$("#runButton").click(function(){
+
+			$("#resultFrame").contents().find('html').html("<style>"+$("#cssCode").val()+"</style>"+$("#htmlCode").val());		//change content of iframe
+
+			//eval() allows to evaluate JS code
+			document.getElementById('resultFrame').contentWindow.eval($('#JSCode').val());
+		});
+
+	</script>
+
+</body>
+
+
+
+</html>
