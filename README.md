@@ -2,6 +2,8 @@
 
 I rebuilt the JS Bin website. You can find my version [here](https://ztsorojev.github.io/JS_Bin/).
 
+**Languages:** HTML, CSS, JavaScript, jQuery <br />
+
 ![Alt text](https://github.com/ztsorojev/JS_Bin/blob/master/jsbin2.JPG)
 
 This website allows you to write HTML, CSS and JavaScript code and compile it through your web browser to see the result.
